@@ -50,15 +50,16 @@ correct_output = """5624-82: mir Tor
 
 class TestNumberEncodings(unittest.TestCase):
 
-    def test_correct_encoding_on_sample_data(self):
-        expected_results = [s.strip() for s in correct_output]
+    def setUp(self):
         mapping_dict = create_mapping_dict("E | J N Q | R W X | D S Y | F T | A M | C I V | B K U | L O P | G H Z")
         words_list = sample_dictionary
+        self.phone_number_encoder = PhoneNumberEncoder(mapping_dict=mapping_dict, words_list=words_list)
 
-        phone_number_encoder = PhoneNumberEncoder(mapping_dict=mapping_dict, words_list=words_list)
+    def test_correct_encoding_on_sample_data(self):
+        expected_results = [s.strip() for s in correct_output]
 
         for phone_number in sample_phones:
-            encodings = phone_number_encoder.get_encodings(phone_number, separator=" ")
+            encodings = self.phone_number_encoder.get_encodings(phone_number, separator=" ")
             for encoding in encodings:
                 expected_output = template(phone_number, encoding)
                 assert expected_output in expected_results
