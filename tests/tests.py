@@ -1,6 +1,6 @@
 import unittest
 from number_encoding import PhoneNumberEncoder
-from utils import create_mapping_dict
+from utils import create_mapping_dict, template
 
 sample_dictionary = """an
                     blau
