@@ -1,11 +1,14 @@
+from importlib import import_module
+
 class PhoneNumberEncoder(object):
 	"""docstring for PhoneNumberEncoder"""
-	def __init__(self, **args):
-		
+	def __init__(self, indexing_strategy='lookup_by_encoding', **args):
 		self.mapping_dict = args['mapping_dict']
-		self.word_list = args['words_list']
+		self.words_list = args['words_list']
+		strategy = import_module('indexing_strategies.' + indexing_strategy)
+		Index = strategy.Index
+		self.index = Index(mapping_dict=self.mapping_dict, words_list=self.words_list)
 
-	@classmethod
 	def get_encodings(self, phone_number, separator=" "):
 		results = []
 		x = phone_number.strip()
