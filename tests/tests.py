@@ -67,6 +67,9 @@ class TestNumberEncodings(unittest.TestCase):
             
         assert len(expected_results) == 0
 
+    def test_empty_list_returned_when_no_encoding_found(self):
+        assert len(self.phone_number_encoder.get_encodings('112')) == 0
+
 
 if __name__ == '__main__':
     unittest.main()
