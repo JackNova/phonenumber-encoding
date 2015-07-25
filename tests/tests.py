@@ -51,7 +51,7 @@ correct_output = """5624-82: mir Tor
 class TestNumberEncodings(unittest.TestCase):
 
     def test_correct_encoding_on_sample_data(self):
-        expected_results = list(correct_output)
+        expected_results = [s.strip() for s in correct_output]
         mapping_dict = create_mapping_dict("E | J N Q | R W X | D S Y | F T | A M | C I V | B K U | L O P | G H Z")
         words_list = sample_dictionary
 
