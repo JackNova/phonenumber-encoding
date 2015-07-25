@@ -64,7 +64,7 @@ class TestNumberEncodings(unittest.TestCase):
                 assert expected_output in expected_results
                 expected_results.remove(expected_output)
             
-            assert len(expected_results) == 0
+        assert len(expected_results) == 0
 
 
 if __name__ == '__main__':
