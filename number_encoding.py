@@ -78,18 +78,24 @@ class PhoneNumberEncoder(object):
 
 
 	def get_encodings(self, phone_number, separator=" "):
+		self.separator = separator
 		results = []
 		x = phone_number.strip()
+		logging.info('get_encodings(%s)' % x)
 		if x == '112':
-			pass
+			results = self.search(x)
 		elif x == '5624-82':
-			results = ['mir Tor', 'Mix Tor']
+			results = self.search(x)
+			#results = ['mir Tor', 'Mix Tor']
 		elif x == '4824':
-			results = ['Torf', 'fort','Tor 4']
+			results = self.search(x)
+			#results = ['Torf', 'fort','Tor 4']
 		elif x == '10/783--5':
-			results = ['neu o"d 5','je bo"s 5','je Bo" da']
+			results = self.search(x)
+			#results = ['neu o"d 5','je bo"s 5','je Bo" da']
 		elif x == '381482':
-			results = ['so 1 Tor']
+			results = self.search(x)
+			#results = ['so 1 Tor']
 		elif x == '04824':
 			results = ['0 Torf','0 fort','0 Tor 4']
 
