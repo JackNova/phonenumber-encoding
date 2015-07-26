@@ -2,6 +2,7 @@ import unittest
 from number_encoding import PhoneNumberEncoder
 from utils import create_mapping_dict, template
 from mocks import sample_dictionary, sample_phones, correct_output
+import logging
 
 class TestNumberEncodings(unittest.TestCase):
 
@@ -19,7 +20,7 @@ class TestNumberEncodings(unittest.TestCase):
                 expected_output = template(phone_number, encoding)
                 assert expected_output in expected_results
                 expected_results.remove(expected_output)
-            
+        logging.info('here expected_results should be empty %s' % expected_results)
         assert len(expected_results) == 0
 
     def test_empty_list_returned_when_no_encoding_found(self):
