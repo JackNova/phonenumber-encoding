@@ -26,6 +26,11 @@ class TestNumberEncodings(unittest.TestCase):
     def test_empty_list_returned_when_no_encoding_found(self):
         assert len(self.phone_number_encoder.get_encodings('112')) == 0
 
+    def test_returns_original_word_after_encoding(self):
+        # 10/783--5: je Bo" da
+        number = '1078'
+        assert 'je Bo"' in self.phone_number_encoder.get_encodings(number)
+
 
 class TestNumberEncodingsRealData(unittest.TestCase):
     """docstring for TestNumberEncodingsRealData"""
