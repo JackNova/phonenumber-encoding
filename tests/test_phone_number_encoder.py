@@ -27,5 +27,22 @@ class TestNumberEncodings(unittest.TestCase):
         assert len(self.phone_number_encoder.get_encodings('112')) == 0
 
 
+class TestNumberEncodingsRealData(unittest.TestCase):
+    """docstring for TestNumberEncodingsRealData"""
+    def setUp(self):
+        mapping_dict = create_mapping_dict("E | J N Q | R W X | D S Y | F T | A M | C I V | B K U | L O P | G H Z")
+        with open('dictionary.txt') as f:
+            words_list = f.read().splitlines()
+        self.phone_number_encoder = PhoneNumberEncoder(mapping_dict=mapping_dict, words_list=words_list)
+        
+    def test_empty_list_returned_when_no_encoding_found(self):
+        assert len(self.phone_number_encoder.get_encodings('112')) == 0
+
+    def test_get_encodings_with_big_dictionary(self):
+        phone_number = "3202371835"
+
+        result = self.phone_number_encoder.get_encodings(phone_number, separator=" ")
+        assert result == ['3 wer du Jod 5', '3 wer du Joy 5']
+
 if __name__ == '__main__':
     unittest.main()
