@@ -31,6 +31,13 @@ class TestNumberEncodings(unittest.TestCase):
         number = '1078'
         assert 'je Bo"' in self.phone_number_encoder.get_encodings(number)
 
+    def test_ignore_extra_characters_when_encoding(self):
+        weird_number = '//////----1---0/783--5'
+        result1 = self.phone_number_encoder.get_encodings(weird_number)
+        number = '107835'
+        result2 = self.phone_number_encoder.get_encodings(number)
+        assert result2 == result1
+
 
 class TestNumberEncodingsRealData(unittest.TestCase):
     """docstring for TestNumberEncodingsRealData"""
