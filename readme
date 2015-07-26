@@ -8,3 +8,7 @@ optional arguments:
   --d dictionary_path  path to the dictionary list
   --m mapping          encoding map number => character
   --i src              source file containing one number on each line
+
+  ### ATTACHMENTS
+
+  - here is a trello with design ideas and work split: https://trello.com/b/mS9s3s7y/numberencodings
