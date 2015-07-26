@@ -38,6 +38,13 @@ class TestNumberEncodings(unittest.TestCase):
         result2 = self.phone_number_encoder.get_encodings(number)
         assert result2 == result1
 
+    def test_ensure_separator_is_respected(self):
+        n = '10781078'
+        res = self.phone_number_encoder.get_encodings(n, separator=' ')
+        res2 = self.phone_number_encoder.get_encodings(n, separator='**')
+        assert len(''.join(res).split(' ')) == len(''.join(res2).split('**'))
+
+
 
 class TestNumberEncodingsRealData(unittest.TestCase):
     """docstring for TestNumberEncodingsRealData"""
