@@ -49,12 +49,14 @@ class PhoneNumberEncoder(object):
 					logging.info('attempting to encode the remaning number in smaller chunks')
 					logging.info('we have %s numbers more: %s' % (len(remaning), remaning))
 
+					no_word_replacement_possible = True # see if need to append a number
 					for span in range(1, len(remaning)):
 						# chop the remaning number character by character
 						chunk = remaning[:-span]
 						logging.info('trying to encode %s' % chunk)
 						r = self.index.lookup(chunk)
 						if len(r) > 0:
+							no_word_replacement_possible = False
 							logging.info('- got %s results, appending for next computation step' % len(r))
 							for x in r:
 								nxt = (pe + [x], remaning[len(chunk):])
@@ -62,6 +64,11 @@ class PhoneNumberEncoder(object):
 								remaning_computation.append( nxt )
 						else:
 							logging.info('-no results')
+
+					if (len(pe)>0) and no_word_replacement_possible and (pe[-1] not in '0123456789'):
+						nxt = (pe + [remaning[0]], remaning[1:])
+						logging.info('[APPENDING NUMBER] no encoding found for remaning chunks, appending (%s, %s)' % nxt)
+						remaning_computation.append(nxt)
 
 				if len(remaning_computation) == 0:
 					logging.info('computation complete')
