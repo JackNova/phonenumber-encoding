@@ -9,6 +9,10 @@ optional arguments:
   --m mapping          encoding map number => character
   --i src              source file containing one number on each line
 
+  ### ITALIAN DICTIONARY EXAMPLE
+
+  python main.py --d dictionary_ita.txt
+
   ### ATTACHMENTS
 
   - here is a trello with design ideas and work split: https://trello.com/b/mS9s3s7y/numberencodings
