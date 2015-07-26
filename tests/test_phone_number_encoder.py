@@ -63,5 +63,10 @@ class TestNumberEncodingsRealData(unittest.TestCase):
         result = self.phone_number_encoder.get_encodings(phone_number, separator=" ")
         assert result == ['3 wer du Jod 5', '3 wer du Joy 5']
 
+    def test_encode_the_longest_word_in_dict(self):
+        phone_number = '9316357348230213'
+        result = self.phone_number_encoder.get_encodings(phone_number)
+        assert 'zynismusfo"rdernd' in result
+
 if __name__ == '__main__':
     unittest.main()
