@@ -28,6 +28,7 @@ class PhoneNumberEncoder(object):
 					if pe[-1] in '1234567890':
 						logging.info('- nope, the preceding value is already a number')
 					else:
+						logging.info('[APPENDING NUMBER] last element on pe is %s' % pe[-1])
 						logging.info('great, encoding completed with a trailing number')
 						logging.info('-it is next iteration job to append the result')
 						remaning_computation.append( (pe + [remaning], '') )
