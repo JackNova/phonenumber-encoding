@@ -1,0 +1,10 @@
+usage: main.py [-h] [--d dictionary_path] [--m mapping] [--i src]
+
+Encode phone numbers into list of words given a dictionary list and an
+encoding map
+
+optional arguments:
+  -h, --help           show this help message and exit
+  --d dictionary_path  path to the dictionary list
+  --m mapping          encoding map number => character
+  --i src              source file containing one number on each line
