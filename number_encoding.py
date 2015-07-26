@@ -82,6 +82,9 @@ class PhoneNumberEncoder(object):
 					pe, remaning = next_step
 
 		final_results = inner([], number)
+		if len(final_results) == 0:
+			logging.info('[LEADING NUMBER] no encoding found, trying with the leading number')
+			final_results = inner([number[0]], number[1:])
 		return final_results
 
 
