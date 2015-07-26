@@ -2,6 +2,7 @@ import argparse
 from number_encoding import PhoneNumberEncoder
 from utils import create_mapping_dict, template
 import io
+import re
 
 DEFAULT_MAPPING_DICT = "E | J N Q | R W X | D S Y | F T | A M | C I V | B K U | L O P | G H Z"
 
@@ -36,10 +37,13 @@ phone_number_encoder = PhoneNumberEncoder(mapping_dict=mapping_dict, words_list=
 with io.open(args.i, 'r') as source:
 	while True:
 		phone_number = source.readline()
-		if not phone_number:
+		safe_phone_number = ''.join(re.findall(r'\d+', phone_number))
+		if phone_number == '':
 			break
+		elif len(safe_phone_number) < 2:
+			continue
 		else:
-			result = phone_number_encoder.get_encodings(str(phone_number))
+			result = phone_number_encoder.get_encodings(str(safe_phone_number))
 			for r in result:
 				print template(phone_number, r)
 
