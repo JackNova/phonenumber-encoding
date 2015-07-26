@@ -18,5 +18,5 @@ class Index(object):
 			self.index[encoded].append(word)
 
 	def lookup(self, number):
-		return self.index.get(number, None)
+		return self.index.get(number, [])
 
