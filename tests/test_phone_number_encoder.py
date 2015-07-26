@@ -68,5 +68,12 @@ class TestNumberEncodingsRealData(unittest.TestCase):
         result = self.phone_number_encoder.get_encodings(phone_number)
         assert 'zynismusfo"rdernd' in result
 
+    def test_length_of_encoding_matches_length_of_number(self):
+        phone_number = '68376528763907524156749871524386598025368689254638'
+        # ignoring doublequotes, dashes and empty spaces the length of each result should match 
+        # the length of the number
+        result = self.phone_number_encoder.get_encodings(phone_number)
+        assert all([ len(phone_number) == len(r.translate(None, ' "-')) for r in result])
+
 if __name__ == '__main__':
     unittest.main()
