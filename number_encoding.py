@@ -25,7 +25,7 @@ class PhoneNumberEncoder(object):
 					results.append(result)
 				elif len(remaning) == 1: # attempt to encode as a numer, otherwise discard this computation branch
 					logging.info('just one character left here, attempting to encode as number')
-					if pe[-1] in ['1234567890']:
+					if pe[-1] in '1234567890':
 						logging.info('- nope, the preceding value is already a number')
 					else:
 						logging.info('great, encoding completed with a trailing number')
