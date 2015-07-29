@@ -35,24 +35,28 @@ if sys.argv[0]:
 else:
 	args = parse_args()
 
-def run(args):
-	mapping_dict = create_mapping_dict(args.m)
-	with open(args.d) as f:
+
+def create_word_list(path):
+	with open(path) as f:
 		words_list = f.read().splitlines()
+	return words_list
+
+
+def run(words_list=create_word_list(args.d), source_stream=io.open(args.i, 'r')):
+	mapping_dict = create_mapping_dict(args.m)
 	phone_number_encoder = PhoneNumberEncoder(mapping_dict=mapping_dict, words_list=words_list)
 
-	with io.open(args.i, 'r') as source:
-		while True:
-			phone_number = source.readline()
-			safe_phone_number = ''.join(re.findall(r'\d+', phone_number))
-			if phone_number == '':
-				break
-			elif len(safe_phone_number) < 2:
-				continue
-			else:
-				result = phone_number_encoder.get_encodings(str(safe_phone_number))
-				for r in result:
-					print template(phone_number, r)
+	for phone_number in source_stream:
+		safe_phone_number = ''.join(re.findall(r'\d+', phone_number))
+		if phone_number == '':
+			break
+		elif len(safe_phone_number) < 2:
+			continue
+		else:
+			result = phone_number_encoder.get_encodings(str(safe_phone_number))
+			for r in result:
+				print template(phone_number, r)
+		
 
 if __name__ == "__main__":
-	run(args)
+	run()
