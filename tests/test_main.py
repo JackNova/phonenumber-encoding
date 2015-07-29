@@ -23,6 +23,14 @@ class TestMain(unittest.TestCase):
         m.run(words_list=words_list, source_stream=source_stream)
         assert sys.stdout.getvalue().strip() == ""
 
+    def test_output_template(self):
+        words_list = ['batman', 'ciao', 'dario', 'miao', 'pippo', 'a']
+        source_stream = iter(['6658', '35268'])
+        m.run(words_list=words_list, source_stream=source_stream)
+        assert sys.stdout.getvalue() == """6658: ciao
+35268: dario
+"""
+
 
 if __name__ == '__main__':
     unittest.main()
