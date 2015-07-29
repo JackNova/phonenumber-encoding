@@ -15,8 +15,10 @@ class TestLookupByEncoding(unittest.TestCase):
     def test_encode_word(self):
         assert self.index.encode_word(my_word) == '0123456789'
 
-    def test_encode_lowercase_word(self):
-        assert self.index.encode_word(my_word.lower()) == '0123456789' 
+    def test_ignores_capitalization(self):
+        results_upper = self.index.encode_word(my_word.upper())
+        results_lower = self.index.encode_word(my_word.lower())
+        assert set(results_lower) == set(results_upper)
 
     def test_encode_word_with_dashes_and_quotes(self):
         assert self.index.encode_word(strange_word) == '0123456789'
