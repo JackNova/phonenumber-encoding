@@ -129,7 +129,8 @@ class TestNumberEncodingsRealData(unittest.TestCase):
     def test_50_longest_encodable_numbers_are_encoded(self):
         for phone_number in TOP_LONGEST_ENCODABLE_NUMBERS:
             result = self.phone_number_encoder.get_encodings(phone_number)
-            assert len(phone_number) in [len(x.translate(None, '"-')) for x in result]
+            assert len(result) >=1
+            assert all([len(phone_number) == len(coded.translate(None, '"- ')) for coded in result])
 
 if __name__ == '__main__':
     unittest.main()
