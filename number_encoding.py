@@ -1,9 +1,10 @@
 from importlib import import_module
+from config import config
 import logging
 
 class PhoneNumberEncoder(object):
 	"""docstring for PhoneNumberEncoder"""
-	def __init__(self, indexing_strategy='lookup_by_encoding', **args):
+	def __init__(self, indexing_strategy=config['INDEXING_STRATEGY'], **args):
 		self.mapping_dict = args['mapping_dict']
 		self.words_list = args['words_list']
 		strategy = import_module('indexing_strategies.' + indexing_strategy)
