@@ -21,7 +21,7 @@ class TestLookupByEncoding(unittest.TestCase):
         assert set(results_lower) == set(results_upper)
 
     def test_encode_word_with_dashes_and_quotes(self):
-        assert self.index.encode_word(strange_word) == '0123456789'
+        assert self.index.encode_word(strange_word) == self.index.encode_word(strange_word.translate(None, '-"'))
 
     def test_lookup_index(self):
         assert self.index.lookup('4824') == ['fort', 'Torf']
